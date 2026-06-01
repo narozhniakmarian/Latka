@@ -1,0 +1,10 @@
+/**
+  |============================
+  | include css partials with
+  | default @import url()
+  |============================
+*/
+/* Common styles */
+
+/* Sections style */
+@import url('./main.css');
