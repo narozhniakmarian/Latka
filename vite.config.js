@@ -3,13 +3,14 @@ import injectHTML from 'vite-plugin-html-inject';
 import FullReload from 'vite-plugin-full-reload';
 
 export default defineConfig({
+  base: '/Latka/',
   root: 'src',
   build: {
     outDir: '../dist',
   },
   plugins: [
     injectHTML(),
-    FullReload(['./src/**/**.html']),
+    FullReload(['./src/**/*.html']),
   ],
   server: {
     proxy: {
