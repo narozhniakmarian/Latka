@@ -3,7 +3,6 @@ import injectHTML from 'vite-plugin-html-inject';
 import FullReload from 'vite-plugin-full-reload';
 
 export default defineConfig({
-  base: '/Latka/',
   root: 'src',
   build: {
     outDir: '../dist',
