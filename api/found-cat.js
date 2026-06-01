@@ -3,9 +3,8 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method Not Allowed' });
   }
 
-  const { latitude, longitude, accuracy } = req.body;
+  const { latitude, longitude, accuracy, isIP, city } = req.body;
 
-  // В Vercel змінні беруться з process.env
   const BOT_TOKEN = process.env.VITE_TELEGRAM_BOT_TOKEN;
   const CHAT_ID = process.env.VITE_TELEGRAM_CHAT_ID;
 
@@ -14,7 +13,9 @@ export default async function handler(req, res) {
   }
 
   const mapUrl = `https://www.google.com/maps?q=${latitude},${longitude}`;
-  const message = `🐾 *Kot Łatka został znaleziony!* \n\n📍 Lokalizacja: [Zobacz na mapie](${mapUrl})\n🌐 Współrzędne: ${latitude}, ${longitude}\n🎯 Dokładność: ${accuracy}m`;
+  const methodText = isIP ? `🌐 *Lokalizacja przybliżona (Sieć/IP)*\n🏙 Miasto: ${city}` : `🎯 *Lokalizacja GPS (Dokładna)*`;
+  
+  const message = `🐾 *Kot Łatka został znaleziony!* \n\n${methodText}\n📍 Mapa: [Zobacz tutaj](${mapUrl})\n🌐 Współrzędne: ${latitude}, ${longitude}\n🎯 Dokładność: ~${accuracy}m`;
 
   try {
     const response = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
