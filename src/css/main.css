@@ -1,119 +1,200 @@
+:root {
+  --primary-color: #ff8fb1;
+  --secondary-color: #ffd1dc;
+  --text-color: #4a4a4a;
+  --bg-color: #fff9fa;
+  --white: #ffffff;
+  --shadow: 0 10px 30px rgba(255, 143, 177, 0.15);
+}
+
 body {
-    min-height: 100vh;
-    margin: 0;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    color: #333;
-    background-color: #fff9fc;
-    background-image:
-        radial-gradient(circle at 10% 20%, rgba(255, 182, 193, 0.18) 0, transparent 55%),
-        radial-gradient(circle at 80% 70%, rgba(255, 182, 193, 0.16) 0, transparent 55%);
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+  margin: 0;
+  padding: 0;
+  font-family: 'Outfit', 'Inter', -apple-system, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* Subtle paw print background */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cpath d='M30,50 Q30,40 40,40 Q50,40 50,50 Q50,60 40,60 Q30,60 30,50 M60,50 Q60,40 70,40 Q80,40 80,50 Q80,60 70,60 Q60,60 60,50 M45,75 Q45,65 55,65 Q65,65 65,75 Q65,85 55,85 Q45,85 45,75' fill='%23ff8fb1' opacity='0.05'/%3E%3C/svg%3E");
+  background-size: 150px 150px;
 }
 
-.cat-card {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 16px;
+main {
+  margin: 10px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
 }
 
-.cat-card__inner {
-    width: 100%;
-    max-width: 420px;
-    background: rgba(255, 255, 255, 0.9);
-    border-radius: 24px;
-    padding: 20px 18px 24px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
-    backdrop-filter: blur(6px);
+.profile-card {
+  background: var(--white);
+  width: 90%;
+  max-width: 400px;
+  border-radius: 30px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transform: translateY(0);
+  transition: transform 0.3s ease;
+  animation: fadeIn 0.8s ease-out;
 }
 
-.cat-card__header {
-    text-align: center;
-    margin-bottom: 16px;
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.cat-card__photo {
-    width: 140px;
-    height: 140px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 4px solid #ffc6d9;
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+.cat-image-container {
+  width: 100%;
+  aspect-ratio: 1/1;
+  overflow: hidden;
+  position: relative;
+  background-image: url("./img/paw.png");
+  background-size: 150px 150px;
+  background-repeat: repeat;
+  background-position: center;
 }
 
-.cat-card__name {
-    margin: 12px 0 4px;
-    font-size: 1.6rem;
-    letter-spacing: 0.03em;
+.cat-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
 }
 
-.cat-card__subtitle {
-    margin: 0;
-    font-size: 0.9rem;
-    color: #777;
+.profile-card:hover .cat-photo {
+  transform: scale(1.05);
 }
 
-.cat-card__description {
-    font-size: 0.98rem;
-    line-height: 1.5;
-    margin: 12px 0 18px;
+.profile-content {
+  padding: 30px;
+  text-align: center;
+
+  background-image: url("../img/paw.png");
+  background-size: 150px 150px;
+  background-repeat: repeat;
+  background-position: center;
+  background-color: #ffffff;
 }
 
-.cat-card__owner {
-    background: #fff3f7;
-    border-radius: 16px;
-    padding: 12px 14px;
-    margin-bottom: 18px;
+.cat-name {
+  font-size: 2.5rem;
+  margin: 0 0 10px 0;
+  color: var(--primary-color);
+  font-weight: 800;
 }
 
-.cat-card__owner-title {
-    margin: 0 0 4px;
-    font-size: 0.95rem;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: #c45a7a;
+.cat-description {
+  position: relative;
+  font-size: 1.1rem;
+  font-weight: 700;
+  line-height: 1.6;
+  margin-bottom: 25px;
+  z-index: 1;
 }
 
-.cat-card__owner-name {
-    margin: 0 0 4px;
-    font-weight: 600;
+.cat-description::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(6px);
+  border-radius: 12px;
+  z-index: -1;
 }
 
-.cat-card__phone {
-    display: inline-block;
-    font-size: 0.95rem;
-    color: #e0457f;
-    text-decoration: none;
+
+.owner-info {
+  background: var(--bg-color);
+  padding: 20px;
+  border-radius: 20px;
+  margin-bottom: 25px;
 }
 
-.cat-card__phone:hover {
-    text-decoration: underline;
+.owner-label {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 0 0 5px 0;
+  opacity: 0.6;
 }
 
-.cat-card__button {
-    width: 100%;
-    border: none;
-    border-radius: 999px;
-    padding: 12px 16px;
-    font-size: 1rem;
-    font-weight: 600;
-    background: linear-gradient(135deg, #ff6fa5, #ff9fba);
-    color: #fff;
-    cursor: pointer;
-    box-shadow: 0 8px 18px rgba(255, 111, 165, 0.35);
-    transition: transform 0.08s ease, box-shadow 0.08s ease, opacity 0.1s ease;
+.owner-name {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin: 0 0 15px 0;
 }
 
-.cat-card__button:active {
-    transform: translateY(1px);
-    box-shadow: 0 4px 10px rgba(255, 111, 165, 0.3);
-    opacity: 0.95;
+.phone-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--primary-color);
+  color: white;
+  text-decoration: none;
+  padding: 12px 25px;
+  border-radius: 50px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(255, 143, 177, 0.3);
 }
 
-.cat-card__hint {
-    margin-top: 10px;
-    font-size: 0.8rem;
-    color: #777;
-    text-align: center;
+.phone-link:active {
+  transform: scale(0.95);
+}
+
+.found-btn {
+  width: 100%;
+  background: #2ecc71;
+  color: white;
+  border: none;
+  padding: 18px;
+  border-radius: 50px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(46, 204, 113, 0.3);
+  margin-top: 10px;
+  position: relative;
+}
+
+.found-btn:disabled {
+  background: #bdc3c7;
+  cursor: not-allowed;
+}
+
+.found-btn:active:not(:disabled) {
+  transform: translateY(2px);
+}
+
+.status-message {
+  margin-top: 15px;
+  font-size: 0.9rem;
+  min-height: 1.2em;
+}
+
+.status-success {
+  color: #27ae60;
+}
+
+.status-error {
+  color: #e74c3c;
+}
+
+/* Desktop adjustment */
+@media (min-width: 768px) {
+  .profile-card {
+    max-width: 380px;
+  }
 }

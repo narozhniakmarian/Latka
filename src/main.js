@@ -1,64 +1,55 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const btn = document.getElementById('found-cat-btn');
+const foundCatBtn = document.getElementById('foundCatBtn');
+const statusMessage = document.getElementById('statusMessage');
 
-    if (!btn) return;
+if (foundCatBtn) {
+  foundCatBtn.addEventListener('click', async () => {
+    foundCatBtn.disabled = true;
+    const originalText = foundCatBtn.innerText;
+    foundCatBtn.innerText = 'Wysyłanie...';
+    statusMessage.innerText = 'Pobieranie lokalizacji...';
+    statusMessage.className = 'status-message';
 
-    btn.addEventListener('click', async () => {
-        btn.disabled = true;
-        const originalText = btn.textContent;
-        btn.textContent = 'Wysyłam lokalizację...';
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition(
+        async (position) => {
+          try {
+            const { latitude, longitude, accuracy } = position.coords;
+            
+            const response = await fetch('/api/found-cat', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ latitude, longitude, accuracy })
+            });
 
-        if (!('geolocation' in navigator)) {
-            alert('Twoje urządzenie nie obsługuje geolokalizacji.');
-            btn.disabled = false;
-            btn.textContent = originalText;
-            return;
-        }
-
-        navigator.geolocation.getCurrentPosition(
-            async position => {
-                const { latitude, longitude, accuracy } = position.coords;
-
-                try {
-                    const res = await fetch('/api/found-cat', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ latitude, longitude, accuracy }),
-                    });
-
-                    if (!res.ok) {
-                        throw new Error('Błąd odpowiedzi serwera');
-                    }
-
-                    const data = await res.json();
-                    if (data.success) {
-                        alert('Dziękuję! Lokalizacja została wysłana do właściciela.');
-                    } else {
-                        alert('Nie udało się wysłać lokalizacji. Spróbuj ponownie.');
-                    }
-                } catch (err) {
-                    console.error(err);
-                    alert('Wystąpił błąd podczas wysyłania lokalizacji.');
-                } finally {
-                    btn.disabled = false;
-                    btn.textContent = originalText;
-                }
-            },
-            error => {
-                console.error(error);
-                if (error.code === error.PERMISSION_DENIED) {
-                    alert('Nie udzielono zgody na dostęp do lokalizacji.');
-                } else {
-                    alert('Nie udało się pobrać lokalizacji urządzenia.');
-                }
-                btn.disabled = false;
-                btn.textContent = originalText;
-            },
-            {
-                enableHighAccuracy: true,
-                timeout: 10000,
-                maximumAge: 0,
+            if (response.ok) {
+              statusMessage.innerText = 'Lokalizacja została wysłana! Dziękujemy ❤️';
+              statusMessage.classList.add('status-success');
+              foundCatBtn.innerText = 'Wysłano!';
+            } else {
+              throw new Error('Błąd serwera');
             }
-        );
-    });
-});
+          } catch (error) {
+            console.error(error);
+            statusMessage.innerText = 'Błąd podczas wysyłania lokalizacji.';
+            statusMessage.classList.add('status-error');
+            foundCatBtn.disabled = false;
+            foundCatBtn.innerText = originalText;
+          }
+        },
+        (error) => {
+          console.error(error);
+          statusMessage.innerText = 'Nie udało się pobrać lokalizacji. Sprawdź GPS.';
+          statusMessage.classList.add('status-error');
+          foundCatBtn.disabled = false;
+          foundCatBtn.innerText = originalText;
+        },
+        { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 }
+      );
+    } else {
+      statusMessage.innerText = 'Geolokalizacja nie jest wspierana przez Twoją przeglądarkę.';
+      statusMessage.classList.add('status-error');
+      foundCatBtn.disabled = false;
+      foundCatBtn.innerText = originalText;
+    }
+  });
+}

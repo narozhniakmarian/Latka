@@ -1,32 +1,28 @@
-<!-- src/partials/main.html -->
-<section class="cat-card">
-    <div class="cat-card__inner">
-        <header class="cat-card__header">
-            <img src="../image/Łatka.webp" alt="Kot Łatka" class="cat-card__photo" />
-            <h1 class="cat-card__name">Łatka</h1>
-            <p class="cat-card__subtitle">Profil kota podróżnika</p>
-        </header>
+<section class="profile-card">
+    <div class="cat-image-container">
+        <img src="./img/Łatka.webp" alt="Kot Łatka" class="cat-photo" id="catPhoto">
+    </div>
 
-        <p class="cat-card__description">
-            Cześć, jestem Łatka. Lubię spacerować i podróżować po okolicy.
+    <div class="profile-content">
+        <h1 class="cat-name">Łatka</h1>
+        <p class="cat-description">
+            Cześć, jestem Łatka! Uwielbiam spacerować i podróżować po okolicy.
             Nie jestem szkodnikiem, po prostu wszystko mnie ciekawi.
         </p>
 
-        <div class="cat-card__owner">
-            <h2 class="cat-card__owner-title">Właściciel</h2>
-            <p class="cat-card__owner-name">Marian</p>
-            <a class="cat-card__phone" href="tel:+48889037444">
-                Zadzwoń: +48 889 037 444
+        <div class="owner-info">
+            <h2 class="owner-label">Właściciel:</h2>
+            <p class="owner-name">Marian</p>
+            <a href="tel:+48889037444" class="phone-link">
+                <span class="phone-icon">📞</span>
+                +48 889 037 444
             </a>
         </div>
 
-        <button id="found-cat-btn" class="cat-card__button">
-            Znalazłem/am Łatkę – wyślij lokalizację
+        <button id="foundCatBtn" class="found-btn">
+            <span class="btn-text">Znalazłem kota</span>
+            <span class="btn-loader" hidden></span>
         </button>
-
-        <p class="cat-card__hint">
-            Klikając przycisk, wyślesz do właściciela przybliżoną lokalizację
-            miejsca, w którym znalazłeś/aś kota.
-        </p>
+        <p id="statusMessage" class="status-message"></p>
     </div>
 </section>

@@ -1,7 +1,6 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import fetch from 'node-fetch';
 
 dotenv.config();
 
@@ -10,8 +9,8 @@ app.use(cors());
 app.use(express.json());
 
 const PORT = process.env.PORT || 3001;
-const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
-const CHAT_ID = process.env.TELEGRAM_CHAT_ID;
+const BOT_TOKEN = process.env.VITE_TELEGRAM_BOT_TOKEN;
+const CHAT_ID = process.env.VITE_TELEGRAM_CHAT_ID;
 
 app.post('/api/found-cat', async (req, res) => {
   const { latitude, longitude, accuracy } = req.body;
