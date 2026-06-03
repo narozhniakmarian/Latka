@@ -1,44 +1,41 @@
 <!doctype html>
 <html lang="pl">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="./img/paw.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Kot Łatka - Profil</title>
-    <link rel="stylesheet" href="./main.css" />
-  </head>
 
-  <body>
-    <main>
-      <section class="profile-card">
-        <div class="cat-image-container">
-          <img
-            src="./img/Łatka.webp"
-            alt="Kot Łatka"
-            class="cat-photo"
-            id="catPhoto"
-          />
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" href="./img/paw.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kot Łatka - Profil</title>
+  <link rel="stylesheet" href="./src/style.css" />
+</head>
+
+<body>
+  <main>
+    <section class="profile-card">
+      <div class="cat-image-container">
+        <img src="./src/img/Łatka.webp" alt="Kot Łatka" class="cat-photo" id="catPhoto" />
+      </div>
+
+      <div class="profile-content">
+        <h1 class="cat-name">Łatka</h1>
+        <p class="cat-description">
+          Cześć, jestem Łatka! Uwielbiam spacerować i wędrować po okolicy.<br />
+          Nie jestem szkodnikiem, po prostu wszystko mnie ciekawi.
+        </p>
+
+        <div class="owner-info">
+          <h2 class="owner-label">Właściciel:</h2>
+          <p class="owner-name">Marian</p>
+          <a href="tel:+48889037444" class="phone-link">
+            <span class="phone-icon">📞</span>
+            +48 889 037 444
+          </a>
         </div>
+      </div>
+    </section>
+  </main>
 
-        <div class="profile-content">
-          <h1 class="cat-name">Łatka</h1>
-          <p class="cat-description">
-            Cześć, jestem Łatka! Uwielbiam spacerować i wędrować po okolicy.<br />
-            Nie jestem szkodnikiem, po prostu wszystko mnie ciekawi.
-          </p>
+  <script type="module" src="./main.js"></script>
+</body>
 
-          <div class="owner-info">
-            <h2 class="owner-label">Właściciel:</h2>
-            <p class="owner-name">Marian</p>
-            <a href="tel:+48889037444" class="phone-link">
-              <span class="phone-icon">📞</span>
-              +48 889 037 444
-            </a>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <script type="module" src="./main.js"></script>
-  </body>
 </html>

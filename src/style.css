@@ -83,7 +83,7 @@ main {
   padding: 30px;
   text-align: center;
 
-  background-image: url("../img/paw.png");
+  background-image: url("./img/paw.png");
   background-size: 150px 150px;
   background-repeat: repeat;
   background-position: center;
